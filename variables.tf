@@ -322,6 +322,7 @@ variable "node_pools" {
     node_metadatas             = map(string)
     gpu_type                   = map(string)
     kubelet_config             = object({ cpu_cfs_quota = bool, cpu_manager_policy = string, pod_pids_limit = number })
+    network_config             = object({ pod_ipv4_cidr_block = string })
   }))
   default = [{
     node_pool_name             = "gkenp-a"
@@ -343,6 +344,7 @@ variable "node_pools" {
     node_metadatas             = {}
     gpu_type                   = null
     kubelet_config             = null
+    network_config             = null
   }]
 }
 

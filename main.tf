@@ -214,6 +214,14 @@ resource "google_container_node_pool" "node_pools" {
     max_surge       = each.value.max_surge
     max_unavailable = each.value.max_unavailable
   }
+  dynamic "network_config" {
+    for_each = each.value.network_config == null ? [] : [each.value.network_config]
+    iterator = network_config
+    content {
+      create_pod_range    = true
+      pod_ipv4_cidr_block = network_config.value.pod_ipv4_cidr_block
+    }
+  }
   node_config {
     machine_type    = each.value.machine_type
     disk_type       = each.value.disk_type
