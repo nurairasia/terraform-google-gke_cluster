@@ -239,7 +239,7 @@ resource "google_container_node_pool" "node_pools" {
       try(each.value.node_resource_labels, {})
     )
     service_account = module.gke_service_account.email
-    oauth_scopes    = local.oauth_scopes
+    oauth_scopes    = each.value.oauth_scopes == null ? local.oauth_scopes : each.value.oauth_scopes
     tags            = distinct(concat(local.default_network_tags, each.value.network_tags))
     dynamic "taint" {
       for_each = each.value.node_taints
