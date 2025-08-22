@@ -309,6 +309,8 @@ variable "node_pools" {
 
   network_config: (Optional) Specifies the network configuration for the pool. Use this if you want to override the cluster’s default network configuration.
 
+  oauth_scopes: (Optional) Use if you want to override the default https://www.googleapis.com/auth/cloud-platform scope when creating node pools.
+
   EOT
   type = list(object({
     node_pool_name             = string
